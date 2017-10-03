@@ -60,9 +60,38 @@ app.post("/object", (req, res) => {
     }
 });
 
-// GET /data/:key
-app.post("/object", (req, res) => {
-    SomeInfo.findOne({});
+// GET /object/:key?timestamp=1440568980
+app.get("/object/:key", (req, res) => {
+    let query = {};
+    for (let key in req.params) {
+        req.params[key] !== undefined ? (query[key] = req.params[key]) : null;
+    }
+
+    // ========================================
+
+    let { timestamp = new Date().getTime() } = req.query;
+
+    // ========================================
+
+    SomeInfo.findOne(query)
+        .where("timestamp")
+        .lte(timestamp)
+        .sort("-timestamp")
+        .exec()
+        .then(someInfo => {
+            console.log(someInfo);
+            if (someInfo) {
+                res.json({
+                    [someInfo.key]: someInfo.value
+                });
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        });
 });
 
 // GET /data/:key?timestamp=1237367
