@@ -7,10 +7,14 @@
         "bluebird": "^3.5.0",
         "body-parser": "^1.18.2",
         "express": "^4.16.1",
-        "mongoose": "^4.12.0",
-        "nodemon": "^1.12.1"
+        "mongoose": "^4.12.0"
     },
     "scripts": {
-        "dev": "nodemon server.js"
+        "dev": "nodemon server.js",
+        "test": "jest"
+    },
+    "devDependencies": {
+        "nodemon": "^1.12.1",
+        "jest": "^21.2.1"
     }
 }

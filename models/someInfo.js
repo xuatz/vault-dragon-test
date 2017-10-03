@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 let SomeInfoSchema = new Schema({
     key: { type: String, required: true },
     value: { type: Object, required: true },
-    timestamp: { type: String, required: true }
+    timestamp: { type: Date, required: true }
 });
 
 const SomeInfo = mongoose.model("SomeInfo", SomeInfoSchema);
