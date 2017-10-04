@@ -3,7 +3,7 @@ services:
   nginx:
     image: "localhost:5000/nginx"
     ports:
-      - "8088:80"
+      - "80:80"
   mongo:
     image: "mongo:3.4.9"
     ports:
