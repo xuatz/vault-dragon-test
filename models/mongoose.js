@@ -14,9 +14,20 @@ dbConnectionString += "/" + (process.env.DB_NAME || "placeholder_db");
 
 // console.log("dbConnectionString", dbConnectionString);
 
-let options = {
-    useMongoClient: true
-};
+let options = Object.assign({
+    useMongoClient: true,
+    server: {
+        poolSize: 5,
+        auto_reconnect: true,
+        reconnectTries: 5,
+        reconnectWait: 3000,
+        socketOptions: {
+            keepAlive: 300000,
+            connectTimeoutMS: 30000,
+            socketTimeoutMS: 30000
+        }
+    }
+});
 
 mongoose.connect(dbConnectionString, options);
 
