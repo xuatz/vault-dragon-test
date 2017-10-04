@@ -1,0 +1,36 @@
+version: "3"
+services:
+  nginx:
+    image: "localhost:5000/nginx"
+    ports:
+      - "8088:80"
+  mongo:
+    image: "mongo:3.4.9"
+    ports:
+      - "27222:27017"
+    volumes:
+      - "mongo:/data/db"
+  server1:
+    image: "localhost:5000/vault-dragon-test-server:latest"
+    ports:
+      - "9101:9000"
+    environment:
+      - "DB_HOST=mongo"
+  server2:
+    image: "localhost:5000/vault-dragon-test-server:latest"
+    ports:
+      - "9102:9000"
+    environment:
+      - "DB_HOST=mongo"
+  server3:
+    image: "localhost:5000/vault-dragon-test-server:latest"
+    ports:
+      - "9103:9000"
+    environment:
+      - "DB_HOST=mongo"
+volumes:
+  mongo:
+
+
+
+
